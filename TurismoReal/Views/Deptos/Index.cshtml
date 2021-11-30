@@ -1,0 +1,41 @@
+﻿@using TurismoReal.Negocio;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado Deptos</h2>
+
+@{ 
+    List<Deptos> deptos = (List<Deptos>)ViewBag.deptos;
+}
+@Html.ActionLink("Crear Depto", "Create")
+<table>
+    <tr>
+        <th>Id Depto</th>
+        <th>Disponibilidad</th>
+        <th>Estado</th>
+        <th>Región</th>
+        <th>Comúna</th>
+        <th>Dirección</th>
+        <th>Precio Día</th>
+        <th>Opciones</th>
+    </tr>
+    @foreach(var depto in deptos)
+            {
+                <tr>
+                    <td>@depto.Id</td>
+                    <td>@depto.Disponibilidad</td>
+                    <td>@depto.Estado</td>
+                    <td>@depto.Region</td>
+                    <td>@depto.Comuna</td>
+                    <td>@depto.Direccion</td>
+                    <td>@depto.PrecioDia</td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Delete", new { id = depto.Id })
+                        @Html.ActionLink("Editar", "Edit", new { id = depto.Id })
+                    </td>
+                </tr>
+            }
+</table>
+
+@TempData["mensaje"]

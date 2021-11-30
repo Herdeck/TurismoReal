@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d81107a9bc0145cc81fedf6792024e5a" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.CHECK_IN" Width="1.5" PointX="3" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CHECK_OUT" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.DEPTOS" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.FOTO_DEPTO" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ITEMS_DEPTO" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MULTAS" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.PAGO_RESERVA" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RESERVA" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SERVICIOS_EXTRA" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.USUARIOS" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TIPO_USUARIO" Width="1.5" PointX="3" PointY="20.875" IsExpanded="true" />
+        <AssociationConnector Association="Model.ID_DEPTO_CHECKIN_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_PAGO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_SERVICIO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_DEPTO_CHECKOUT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_MULTA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_RESERVA_CHECKOUT_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_DEPTO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_DEPTO_FOTO_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_DEPTO_RESERVA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_RESERVA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_RESERVA_SE_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_USER_RESERVA_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.ID_USER_FK" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

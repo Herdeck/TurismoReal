@@ -1,0 +1,26 @@
+﻿@model TurismoReal.Negocio.ItemsDepto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Modificar Item de un Depto</h2>
+@Html.ActionLink("Ver listado ItemsDepto", "Index")
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(i => i.IdItem)
+    @Html.LabelFor(i => i.IdItem)
+    @Html.TextBoxFor(i => i.IdItem)
+    <br />
+    @Html.LabelFor(i => i.IdDepto)
+    @Html.TextBoxFor(i => i.IdDepto)
+    <br />
+    @Html.LabelFor(i => i.Descripcion)
+    @Html.TextBoxFor(i => i.Descripcion)
+    <br />
+    @Html.LabelFor(i => i.Valor)
+    @Html.TextBoxFor(i => i.Valor)
+    <br />
+    <button>Editar</button>
+}
+

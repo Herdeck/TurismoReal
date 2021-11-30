@@ -1,0 +1,1246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CHECK_IN">
+          <Key>
+            <PropertyRef Name="ID_CHECKIN" />
+          </Key>
+          <Property Name="ID_CHECKIN" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_DEPTO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_PAGO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_SERVICIO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="DOCUMENTO_ACEPTACIÓN" Type="bfile" />
+        </EntityType>
+        <EntityType Name="CHECK_OUT">
+          <Key>
+            <PropertyRef Name="ID_CHECKOUT" />
+          </Key>
+          <Property Name="ID_CHECKOUT" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_MULTA" Type="number" Precision="12" Scale="0" />
+          <Property Name="ID_DEPTO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_RESERVA" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="DOCUMENTO_ENTREGA" Type="bfile" />
+        </EntityType>
+        <EntityType Name="DEPTOS">
+          <Key>
+            <PropertyRef Name="ID_DEPTO" />
+          </Key>
+          <Property Name="ID_DEPTO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="DISPONIBILIDAD" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="ESTADO_DEPTO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="REGION" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="COMUNA" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="DIRECCION" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="PRECIO_DIA" Type="number" Precision="12" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FOTO_DEPTO">
+          <Key>
+            <PropertyRef Name="ID_DEPTO" />
+          </Key>
+          <Property Name="ID_DEPTO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="FOTO" Type="blob" />
+        </EntityType>
+        <EntityType Name="ITEMS_DEPTO">
+          <Key>
+            <PropertyRef Name="ID_ITEM" />
+          </Key>
+          <Property Name="ID_ITEM" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_DEPTO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="VALOR" Type="number" Precision="12" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MULTAS">
+          <Key>
+            <PropertyRef Name="ID_MULTA" />
+          </Key>
+          <Property Name="ID_MULTA" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="DETALLE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="VALOR_MULTA" Type="number" Precision="12" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAGO_RESERVA">
+          <Key>
+            <PropertyRef Name="ID_PAGO" />
+          </Key>
+          <Property Name="ID_PAGO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_RESERVA" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="FECHA_PAGO" Type="date" Nullable="false" />
+          <Property Name="MONTO" Type="number" Precision="12" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RESERVA">
+          <Key>
+            <PropertyRef Name="ID_RESERVA" />
+          </Key>
+          <Property Name="ID_RESERVA" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_USER" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_DEPTO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="FECHA_RESERVA" Type="date" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="date" Nullable="false" />
+          <Property Name="FECHA_TERMINO" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SERVICIOS_EXTRA">
+          <Key>
+            <PropertyRef Name="ID_SERVICIO" />
+          </Key>
+          <Property Name="ID_SERVICIO" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_RESERVA" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="NOMBRE_SERVICIO" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'TURISMOREAL.TIPO_USUARIO' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="TIPO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+            <PropertyRef Name="TIPO_CTA" />
+          </Key>
+          <Property Name="ID_USER" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="TIPO_CTA" Type="varchar2" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+          </Key>
+          <Property Name="ID_USER" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="EMAIL_USER" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="TIPO_CTA" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="P_NOM" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="S_NOM" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="P_APE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="S_APE" Type="varchar2" MaxLength="50" Nullable="false" />
+          <Property Name="RUT" Type="number" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="D_VER" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="CARGO" Type="varchar2" MaxLength="50" />
+        </EntityType>
+        <Association Name="ID_DEPTO_CHECKIN_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="CHECK_IN" Type="Self.CHECK_IN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="CHECK_IN">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_DEPTO_CHECKOUT_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="CHECK_OUT" Type="Self.CHECK_OUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="CHECK_OUT">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_DEPTO_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="ITEMS_DEPTO" Type="Self.ITEMS_DEPTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="ITEMS_DEPTO">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_DEPTO_FOTO_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="FOTO_DEPTO" Type="Self.FOTO_DEPTO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="FOTO_DEPTO">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_DEPTO_RESERVA_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_MULTA_FK">
+          <End Role="MULTAS" Type="Self.MULTAS" Multiplicity="0..1" />
+          <End Role="CHECK_OUT" Type="Self.CHECK_OUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MULTAS">
+              <PropertyRef Name="ID_MULTA" />
+            </Principal>
+            <Dependent Role="CHECK_OUT">
+              <PropertyRef Name="ID_MULTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_PAGO_FK">
+          <End Role="PAGO_RESERVA" Type="Self.PAGO_RESERVA" Multiplicity="1" />
+          <End Role="CHECK_IN" Type="Self.CHECK_IN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAGO_RESERVA">
+              <PropertyRef Name="ID_PAGO" />
+            </Principal>
+            <Dependent Role="CHECK_IN">
+              <PropertyRef Name="ID_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_RESERVA_CHECKOUT_FK">
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
+          <End Role="CHECK_OUT" Type="Self.CHECK_OUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESERVA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Principal>
+            <Dependent Role="CHECK_OUT">
+              <PropertyRef Name="ID_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_RESERVA_FK">
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
+          <End Role="PAGO_RESERVA" Type="Self.PAGO_RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESERVA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Principal>
+            <Dependent Role="PAGO_RESERVA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_RESERVA_SE_FK">
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
+          <End Role="SERVICIOS_EXTRA" Type="Self.SERVICIOS_EXTRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESERVA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Principal>
+            <Dependent Role="SERVICIOS_EXTRA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_SERVICIO_FK">
+          <End Role="SERVICIOS_EXTRA" Type="Self.SERVICIOS_EXTRA" Multiplicity="1" />
+          <End Role="CHECK_IN" Type="Self.CHECK_IN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS_EXTRA">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="CHECK_IN">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_USER_FK">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="TIPO_USUARIO">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_USER_RESERVA_FK">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_CREATE_CHECKIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDCHECKIN" Type="number" Mode="In" />
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_IDPAGO" Type="number" Mode="In" />
+          <Parameter Name="V_IDSERVICIO" Type="number" Mode="In" />
+          <Parameter Name="V_DOCUMENTO" Type="bfile" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_CHECKOUT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDCHECKOUT" Type="number" Mode="In" />
+          <Parameter Name="V_IDMULTA" Type="number" Mode="In" />
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_IDRESERVA" Type="number" Mode="In" />
+          <Parameter Name="V_DOCUMENTO" Type="bfile" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_DEPTOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_DISP" Type="number" Mode="In" />
+          <Parameter Name="V_ESTADO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_REGION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_COMUNA" Type="varchar2" Mode="In" />
+          <Parameter Name="V_DIRECCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PRECIODIA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_FOTODEPTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_FOTO" Type="blob" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_ITEMSDEPTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDITEM" Type="number" Mode="In" />
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_VALOR" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_MULTAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDMULTA" Type="number" Mode="In" />
+          <Parameter Name="V_DETALLE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_VALORMULTA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_PAGORESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDPAGO" Type="number" Mode="In" />
+          <Parameter Name="V_IDRESERVA" Type="number" Mode="In" />
+          <Parameter Name="V_FECHAPAGO" Type="date" Mode="In" />
+          <Parameter Name="V_MONTO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDRESERVA" Type="number" Mode="In" />
+          <Parameter Name="V_IDUSER" Type="number" Mode="In" />
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_FECHARESERVA" Type="date" Mode="In" />
+          <Parameter Name="V_FECHAINICIO" Type="date" Mode="In" />
+          <Parameter Name="V_FECHATERMINO" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_SERVICIOSEXTRA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDSERVICIO" Type="number" Mode="In" />
+          <Parameter Name="V_IDRESERVA" Type="number" Mode="In" />
+          <Parameter Name="V_NOMBRESERVICIO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_DESCRIPCION" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_TIPOUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDUSER" Type="number" Mode="In" />
+          <Parameter Name="V_TIPOCTA" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_CREATE_USUARIOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDUSER" Type="number" Mode="In" />
+          <Parameter Name="V_EMAIL" Type="varchar2" Mode="In" />
+          <Parameter Name="V_TIPOCTA" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PNOM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_SNOM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PAPE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_SAPE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_RUT" Type="number" Mode="In" />
+          <Parameter Name="V_DVER" Type="varchar2" Mode="In" />
+          <Parameter Name="V_CARGO" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_CHECKIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_CHECKOUT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_DEPTOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_FOTODEPTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_ITEMSDEPTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_MULTAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_PAGORESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_SERVICIOSEXTRA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_TIPOUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_DELETE_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_ID" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_CHECKIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDCHECKIN" Type="number" Mode="In" />
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_IDPAGO" Type="number" Mode="In" />
+          <Parameter Name="V_IDSERVICIO" Type="number" Mode="In" />
+          <Parameter Name="V_DOCUMENTO" Type="bfile" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_CHECKOUT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDCHECKOUT" Type="number" Mode="In" />
+          <Parameter Name="V_IDMULTA" Type="number" Mode="In" />
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_IDRESERVA" Type="number" Mode="In" />
+          <Parameter Name="V_DOCUMENTO" Type="bfile" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_DEPTOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_DISPONIBILIDAD" Type="number" Mode="In" />
+          <Parameter Name="V_ESTADO" Type="varchar2" Mode="In" />
+          <Parameter Name="V_REGION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_COMUNA" Type="varchar2" Mode="In" />
+          <Parameter Name="V_DIRECCION" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PRECIODIA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_FOTODEPTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_FOTO" Type="blob" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_ITEMSDEPTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDITEM" Type="number" Mode="In" />
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_DESC" Type="varchar2" Mode="In" />
+          <Parameter Name="V_VALOR" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_MULTAS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDMULTA" Type="number" Mode="In" />
+          <Parameter Name="V_DETALLE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_VALORMULTA" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_PAGORESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDPAGO" Type="number" Mode="In" />
+          <Parameter Name="V_IDRESERVA" Type="number" Mode="In" />
+          <Parameter Name="V_FECHAPAGO" Type="date" Mode="In" />
+          <Parameter Name="V_MONTO" Type="number" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_RESERVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDRESERVA" Type="number" Mode="In" />
+          <Parameter Name="V_IDUSER" Type="number" Mode="In" />
+          <Parameter Name="V_IDDEPTO" Type="number" Mode="In" />
+          <Parameter Name="V_FECHARESERVA" Type="date" Mode="In" />
+          <Parameter Name="V_FECHAINICIO" Type="date" Mode="In" />
+          <Parameter Name="V_FECHATERMINO" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_SERVICIOSEXTRA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDSERVICIO" Type="number" Mode="In" />
+          <Parameter Name="V_IDRESERVA" Type="number" Mode="In" />
+          <Parameter Name="V_NOMBRE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_DESC" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_TIPOUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDUSER" Type="number" Mode="In" />
+          <Parameter Name="V_TIPOCTA" Type="varchar2" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_USUARIOS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="TURISMOREAL">
+          <Parameter Name="V_IDUSER" Type="number" Mode="In" />
+          <Parameter Name="V_EMAIL" Type="varchar2" Mode="In" />
+          <Parameter Name="V_TIPOCTA" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PNOM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_SNOM" Type="varchar2" Mode="In" />
+          <Parameter Name="V_PAPE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_SAPE" Type="varchar2" Mode="In" />
+          <Parameter Name="V_RUT" Type="number" Mode="In" />
+          <Parameter Name="V_DVER" Type="varchar2" Mode="In" />
+          <Parameter Name="V_CARGO" Type="varchar2" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="CHECK_IN" EntityType="Self.CHECK_IN" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="CHECK_OUT" EntityType="Self.CHECK_OUT" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="DEPTOS" EntityType="Self.DEPTOS" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="FOTO_DEPTO" EntityType="Self.FOTO_DEPTO" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="ITEMS_DEPTO" EntityType="Self.ITEMS_DEPTO" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="MULTAS" EntityType="Self.MULTAS" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="PAGO_RESERVA" EntityType="Self.PAGO_RESERVA" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="RESERVA" EntityType="Self.RESERVA" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="SERVICIOS_EXTRA" EntityType="Self.SERVICIOS_EXTRA" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" Schema="TURISMOREAL" store:Type="Tables" />
+          <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" store:Type="Tables" store:Schema="TURISMOREAL">
+            <DefiningQuery>SELECT 
+"TIPO_USUARIO"."ID_USER" AS "ID_USER", 
+"TIPO_USUARIO"."TIPO_CTA" AS "TIPO_CTA"
+FROM "TURISMOREAL"."TIPO_USUARIO" "TIPO_USUARIO"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="ID_DEPTO_CHECKIN_FK" Association="Self.ID_DEPTO_CHECKIN_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="CHECK_IN" EntitySet="CHECK_IN" />
+          </AssociationSet>
+          <AssociationSet Name="ID_DEPTO_CHECKOUT_FK" Association="Self.ID_DEPTO_CHECKOUT_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="CHECK_OUT" EntitySet="CHECK_OUT" />
+          </AssociationSet>
+          <AssociationSet Name="ID_DEPTO_FK" Association="Self.ID_DEPTO_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="ITEMS_DEPTO" EntitySet="ITEMS_DEPTO" />
+          </AssociationSet>
+          <AssociationSet Name="ID_DEPTO_FOTO_FK" Association="Self.ID_DEPTO_FOTO_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="FOTO_DEPTO" EntitySet="FOTO_DEPTO" />
+          </AssociationSet>
+          <AssociationSet Name="ID_DEPTO_RESERVA_FK" Association="Self.ID_DEPTO_RESERVA_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="ID_MULTA_FK" Association="Self.ID_MULTA_FK">
+            <End Role="MULTAS" EntitySet="MULTAS" />
+            <End Role="CHECK_OUT" EntitySet="CHECK_OUT" />
+          </AssociationSet>
+          <AssociationSet Name="ID_PAGO_FK" Association="Self.ID_PAGO_FK">
+            <End Role="PAGO_RESERVA" EntitySet="PAGO_RESERVA" />
+            <End Role="CHECK_IN" EntitySet="CHECK_IN" />
+          </AssociationSet>
+          <AssociationSet Name="ID_RESERVA_CHECKOUT_FK" Association="Self.ID_RESERVA_CHECKOUT_FK">
+            <End Role="RESERVA" EntitySet="RESERVA" />
+            <End Role="CHECK_OUT" EntitySet="CHECK_OUT" />
+          </AssociationSet>
+          <AssociationSet Name="ID_RESERVA_FK" Association="Self.ID_RESERVA_FK">
+            <End Role="RESERVA" EntitySet="RESERVA" />
+            <End Role="PAGO_RESERVA" EntitySet="PAGO_RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="ID_RESERVA_SE_FK" Association="Self.ID_RESERVA_SE_FK">
+            <End Role="RESERVA" EntitySet="RESERVA" />
+            <End Role="SERVICIOS_EXTRA" EntitySet="SERVICIOS_EXTRA" />
+          </AssociationSet>
+          <AssociationSet Name="ID_SERVICIO_FK" Association="Self.ID_SERVICIO_FK">
+            <End Role="SERVICIOS_EXTRA" EntitySet="SERVICIOS_EXTRA" />
+            <End Role="CHECK_IN" EntitySet="CHECK_IN" />
+          </AssociationSet>
+          <AssociationSet Name="ID_USER_FK" Association="Self.ID_USER_FK">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="ID_USER_RESERVA_FK" Association="Self.ID_USER_RESERVA_FK">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CHECK_IN">
+          <Key>
+            <PropertyRef Name="ID_CHECKIN" />
+          </Key>
+          <Property Name="ID_CHECKIN" Type="Int64" Nullable="false" />
+          <Property Name="ID_DEPTO" Type="Int64" Nullable="false" />
+          <Property Name="ID_PAGO" Type="Int64" Nullable="false" />
+          <Property Name="ID_SERVICIO" Type="Int64" Nullable="false" />
+          <Property Name="DOCUMENTO_ACEPTACIÓN" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DEPTOS" Relationship="Self.ID_DEPTO_CHECKIN_FK" FromRole="CHECK_IN" ToRole="DEPTOS" />
+          <NavigationProperty Name="PAGO_RESERVA" Relationship="Self.ID_PAGO_FK" FromRole="CHECK_IN" ToRole="PAGO_RESERVA" />
+          <NavigationProperty Name="SERVICIOS_EXTRA" Relationship="Self.ID_SERVICIO_FK" FromRole="CHECK_IN" ToRole="SERVICIOS_EXTRA" />
+        </EntityType>
+        <EntityType Name="CHECK_OUT">
+          <Key>
+            <PropertyRef Name="ID_CHECKOUT" />
+          </Key>
+          <Property Name="ID_CHECKOUT" Type="Int64" Nullable="false" />
+          <Property Name="ID_MULTA" Type="Int64" />
+          <Property Name="ID_DEPTO" Type="Int64" Nullable="false" />
+          <Property Name="ID_RESERVA" Type="Int64" Nullable="false" />
+          <Property Name="DOCUMENTO_ENTREGA" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DEPTOS" Relationship="Self.ID_DEPTO_CHECKOUT_FK" FromRole="CHECK_OUT" ToRole="DEPTOS" />
+          <NavigationProperty Name="MULTAS" Relationship="Self.ID_MULTA_FK" FromRole="CHECK_OUT" ToRole="MULTAS" />
+          <NavigationProperty Name="RESERVA" Relationship="Self.ID_RESERVA_CHECKOUT_FK" FromRole="CHECK_OUT" ToRole="RESERVA" />
+        </EntityType>
+        <EntityType Name="DEPTOS">
+          <Key>
+            <PropertyRef Name="ID_DEPTO" />
+          </Key>
+          <Property Name="ID_DEPTO" Type="Int64" Nullable="false" />
+          <Property Name="DISPONIBILIDAD" Type="Int16" Nullable="false" />
+          <Property Name="ESTADO_DEPTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="REGION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMUNA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIRECCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO_DIA" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CHECK_IN" Relationship="Self.ID_DEPTO_CHECKIN_FK" FromRole="DEPTOS" ToRole="CHECK_IN" />
+          <NavigationProperty Name="CHECK_OUT" Relationship="Self.ID_DEPTO_CHECKOUT_FK" FromRole="DEPTOS" ToRole="CHECK_OUT" />
+          <NavigationProperty Name="ITEMS_DEPTO" Relationship="Self.ID_DEPTO_FK" FromRole="DEPTOS" ToRole="ITEMS_DEPTO" />
+          <NavigationProperty Name="FOTO_DEPTO" Relationship="Self.ID_DEPTO_FOTO_FK" FromRole="DEPTOS" ToRole="FOTO_DEPTO" />
+          <NavigationProperty Name="RESERVA" Relationship="Self.ID_DEPTO_RESERVA_FK" FromRole="DEPTOS" ToRole="RESERVA" />
+        </EntityType>
+        <EntityType Name="FOTO_DEPTO">
+          <Key>
+            <PropertyRef Name="ID_DEPTO" />
+          </Key>
+          <Property Name="ID_DEPTO" Type="Int64" Nullable="false" />
+          <Property Name="FOTO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="DEPTOS" Relationship="Self.ID_DEPTO_FOTO_FK" FromRole="FOTO_DEPTO" ToRole="DEPTOS" />
+        </EntityType>
+        <EntityType Name="ITEMS_DEPTO">
+          <Key>
+            <PropertyRef Name="ID_ITEM" />
+          </Key>
+          <Property Name="ID_ITEM" Type="Int64" Nullable="false" />
+          <Property Name="ID_DEPTO" Type="Int64" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="DEPTOS" Relationship="Self.ID_DEPTO_FK" FromRole="ITEMS_DEPTO" ToRole="DEPTOS" />
+        </EntityType>
+        <EntityType Name="MULTAS">
+          <Key>
+            <PropertyRef Name="ID_MULTA" />
+          </Key>
+          <Property Name="ID_MULTA" Type="Int64" Nullable="false" />
+          <Property Name="DETALLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VALOR_MULTA" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CHECK_OUT" Relationship="Self.ID_MULTA_FK" FromRole="MULTAS" ToRole="CHECK_OUT" />
+        </EntityType>
+        <EntityType Name="PAGO_RESERVA">
+          <Key>
+            <PropertyRef Name="ID_PAGO" />
+          </Key>
+          <Property Name="ID_PAGO" Type="Int64" Nullable="false" />
+          <Property Name="ID_RESERVA" Type="Int64" Nullable="false" />
+          <Property Name="FECHA_PAGO" Type="DateTime" Nullable="false" />
+          <Property Name="MONTO" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CHECK_IN" Relationship="Self.ID_PAGO_FK" FromRole="PAGO_RESERVA" ToRole="CHECK_IN" />
+          <NavigationProperty Name="RESERVA" Relationship="Self.ID_RESERVA_FK" FromRole="PAGO_RESERVA" ToRole="RESERVA" />
+        </EntityType>
+        <EntityType Name="RESERVA">
+          <Key>
+            <PropertyRef Name="ID_RESERVA" />
+          </Key>
+          <Property Name="ID_RESERVA" Type="Int64" Nullable="false" />
+          <Property Name="ID_USER" Type="Int64" Nullable="false" />
+          <Property Name="ID_DEPTO" Type="Int64" Nullable="false" />
+          <Property Name="FECHA_RESERVA" Type="DateTime" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Nullable="false" />
+          <Property Name="FECHA_TERMINO" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="CHECK_OUT" Relationship="Self.ID_RESERVA_CHECKOUT_FK" FromRole="RESERVA" ToRole="CHECK_OUT" />
+          <NavigationProperty Name="DEPTOS" Relationship="Self.ID_DEPTO_RESERVA_FK" FromRole="RESERVA" ToRole="DEPTOS" />
+          <NavigationProperty Name="PAGO_RESERVA" Relationship="Self.ID_RESERVA_FK" FromRole="RESERVA" ToRole="PAGO_RESERVA" />
+          <NavigationProperty Name="SERVICIOS_EXTRA" Relationship="Self.ID_RESERVA_SE_FK" FromRole="RESERVA" ToRole="SERVICIOS_EXTRA" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.ID_USER_RESERVA_FK" FromRole="RESERVA" ToRole="USUARIOS" />
+        </EntityType>
+        <EntityType Name="SERVICIOS_EXTRA">
+          <Key>
+            <PropertyRef Name="ID_SERVICIO" />
+          </Key>
+          <Property Name="ID_SERVICIO" Type="Int64" Nullable="false" />
+          <Property Name="ID_RESERVA" Type="Int64" Nullable="false" />
+          <Property Name="NOMBRE_SERVICIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CHECK_IN" Relationship="Self.ID_SERVICIO_FK" FromRole="SERVICIOS_EXTRA" ToRole="CHECK_IN" />
+          <NavigationProperty Name="RESERVA" Relationship="Self.ID_RESERVA_SE_FK" FromRole="SERVICIOS_EXTRA" ToRole="RESERVA" />
+        </EntityType>
+        <EntityType Name="USUARIOS">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+          </Key>
+          <Property Name="ID_USER" Type="Int64" Nullable="false" />
+          <Property Name="EMAIL_USER" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPO_CTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_NOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="S_NOM" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="P_APE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="S_APE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RUT" Type="Int64" Nullable="false" />
+          <Property Name="D_VER" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CARGO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RESERVA" Relationship="Self.ID_USER_RESERVA_FK" FromRole="USUARIOS" ToRole="RESERVA" />
+          <NavigationProperty Name="TIPO_USUARIO" Relationship="Self.ID_USER_FK" FromRole="USUARIOS" ToRole="TIPO_USUARIO" />
+        </EntityType>
+        <EntityType Name="TIPO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID_USER" />
+            <PropertyRef Name="TIPO_CTA" />
+          </Key>
+          <Property Name="ID_USER" Type="Int64" Nullable="false" />
+          <Property Name="TIPO_CTA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIOS" Relationship="Self.ID_USER_FK" FromRole="TIPO_USUARIO" ToRole="USUARIOS" />
+        </EntityType>
+        <Association Name="ID_DEPTO_CHECKIN_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="CHECK_IN" Type="Self.CHECK_IN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="CHECK_IN">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_PAGO_FK">
+          <End Role="PAGO_RESERVA" Type="Self.PAGO_RESERVA" Multiplicity="1" />
+          <End Role="CHECK_IN" Type="Self.CHECK_IN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAGO_RESERVA">
+              <PropertyRef Name="ID_PAGO" />
+            </Principal>
+            <Dependent Role="CHECK_IN">
+              <PropertyRef Name="ID_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_SERVICIO_FK">
+          <End Role="SERVICIOS_EXTRA" Type="Self.SERVICIOS_EXTRA" Multiplicity="1" />
+          <End Role="CHECK_IN" Type="Self.CHECK_IN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SERVICIOS_EXTRA">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Principal>
+            <Dependent Role="CHECK_IN">
+              <PropertyRef Name="ID_SERVICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_DEPTO_CHECKOUT_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="CHECK_OUT" Type="Self.CHECK_OUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="CHECK_OUT">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_MULTA_FK">
+          <End Role="MULTAS" Type="Self.MULTAS" Multiplicity="0..1" />
+          <End Role="CHECK_OUT" Type="Self.CHECK_OUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MULTAS">
+              <PropertyRef Name="ID_MULTA" />
+            </Principal>
+            <Dependent Role="CHECK_OUT">
+              <PropertyRef Name="ID_MULTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_RESERVA_CHECKOUT_FK">
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
+          <End Role="CHECK_OUT" Type="Self.CHECK_OUT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESERVA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Principal>
+            <Dependent Role="CHECK_OUT">
+              <PropertyRef Name="ID_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_DEPTO_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="ITEMS_DEPTO" Type="Self.ITEMS_DEPTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="ITEMS_DEPTO">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_DEPTO_FOTO_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="FOTO_DEPTO" Type="Self.FOTO_DEPTO" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="FOTO_DEPTO">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_DEPTO_RESERVA_FK">
+          <End Role="DEPTOS" Type="Self.DEPTOS" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPTOS">
+              <PropertyRef Name="ID_DEPTO" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_DEPTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_RESERVA_FK">
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
+          <End Role="PAGO_RESERVA" Type="Self.PAGO_RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESERVA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Principal>
+            <Dependent Role="PAGO_RESERVA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_RESERVA_SE_FK">
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="1" />
+          <End Role="SERVICIOS_EXTRA" Type="Self.SERVICIOS_EXTRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RESERVA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Principal>
+            <Dependent Role="SERVICIOS_EXTRA">
+              <PropertyRef Name="ID_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_USER_RESERVA_FK">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="RESERVA" Type="Self.RESERVA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="RESERVA">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ID_USER_FK">
+          <End Role="USUARIOS" Type="Self.USUARIOS" Multiplicity="1" />
+          <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIOS">
+              <PropertyRef Name="ID_USER" />
+            </Principal>
+            <Dependent Role="TIPO_USUARIO">
+              <PropertyRef Name="ID_USER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TurismoRealEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CHECK_IN" EntityType="Self.CHECK_IN" />
+          <EntitySet Name="CHECK_OUT" EntityType="Self.CHECK_OUT" />
+          <EntitySet Name="DEPTOS" EntityType="Self.DEPTOS" />
+          <EntitySet Name="FOTO_DEPTO" EntityType="Self.FOTO_DEPTO" />
+          <EntitySet Name="ITEMS_DEPTO" EntityType="Self.ITEMS_DEPTO" />
+          <EntitySet Name="MULTAS" EntityType="Self.MULTAS" />
+          <EntitySet Name="PAGO_RESERVA" EntityType="Self.PAGO_RESERVA" />
+          <EntitySet Name="RESERVA" EntityType="Self.RESERVA" />
+          <EntitySet Name="SERVICIOS_EXTRA" EntityType="Self.SERVICIOS_EXTRA" />
+          <EntitySet Name="USUARIOS" EntityType="Self.USUARIOS" />
+          <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" />
+          <AssociationSet Name="ID_DEPTO_CHECKIN_FK" Association="Self.ID_DEPTO_CHECKIN_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="CHECK_IN" EntitySet="CHECK_IN" />
+          </AssociationSet>
+          <AssociationSet Name="ID_PAGO_FK" Association="Self.ID_PAGO_FK">
+            <End Role="PAGO_RESERVA" EntitySet="PAGO_RESERVA" />
+            <End Role="CHECK_IN" EntitySet="CHECK_IN" />
+          </AssociationSet>
+          <AssociationSet Name="ID_SERVICIO_FK" Association="Self.ID_SERVICIO_FK">
+            <End Role="SERVICIOS_EXTRA" EntitySet="SERVICIOS_EXTRA" />
+            <End Role="CHECK_IN" EntitySet="CHECK_IN" />
+          </AssociationSet>
+          <AssociationSet Name="ID_DEPTO_CHECKOUT_FK" Association="Self.ID_DEPTO_CHECKOUT_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="CHECK_OUT" EntitySet="CHECK_OUT" />
+          </AssociationSet>
+          <AssociationSet Name="ID_MULTA_FK" Association="Self.ID_MULTA_FK">
+            <End Role="MULTAS" EntitySet="MULTAS" />
+            <End Role="CHECK_OUT" EntitySet="CHECK_OUT" />
+          </AssociationSet>
+          <AssociationSet Name="ID_RESERVA_CHECKOUT_FK" Association="Self.ID_RESERVA_CHECKOUT_FK">
+            <End Role="RESERVA" EntitySet="RESERVA" />
+            <End Role="CHECK_OUT" EntitySet="CHECK_OUT" />
+          </AssociationSet>
+          <AssociationSet Name="ID_DEPTO_FK" Association="Self.ID_DEPTO_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="ITEMS_DEPTO" EntitySet="ITEMS_DEPTO" />
+          </AssociationSet>
+          <AssociationSet Name="ID_DEPTO_FOTO_FK" Association="Self.ID_DEPTO_FOTO_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="FOTO_DEPTO" EntitySet="FOTO_DEPTO" />
+          </AssociationSet>
+          <AssociationSet Name="ID_DEPTO_RESERVA_FK" Association="Self.ID_DEPTO_RESERVA_FK">
+            <End Role="DEPTOS" EntitySet="DEPTOS" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="ID_RESERVA_FK" Association="Self.ID_RESERVA_FK">
+            <End Role="RESERVA" EntitySet="RESERVA" />
+            <End Role="PAGO_RESERVA" EntitySet="PAGO_RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="ID_RESERVA_SE_FK" Association="Self.ID_RESERVA_SE_FK">
+            <End Role="RESERVA" EntitySet="RESERVA" />
+            <End Role="SERVICIOS_EXTRA" EntitySet="SERVICIOS_EXTRA" />
+          </AssociationSet>
+          <AssociationSet Name="ID_USER_RESERVA_FK" Association="Self.ID_USER_RESERVA_FK">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="RESERVA" EntitySet="RESERVA" />
+          </AssociationSet>
+          <AssociationSet Name="ID_USER_FK" Association="Self.ID_USER_FK">
+            <End Role="USUARIOS" EntitySet="USUARIOS" />
+            <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
+          </AssociationSet>
+          <FunctionImport Name="SP_CREATE_CHECKIN">
+            <Parameter Name="V_IDCHECKIN" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDPAGO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDSERVICIO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DOCUMENTO" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_CHECKOUT">
+            <Parameter Name="V_IDCHECKOUT" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDMULTA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DOCUMENTO" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_DEPTOS">
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DISP" Mode="In" Type="Decimal" />
+            <Parameter Name="V_ESTADO" Mode="In" Type="String" />
+            <Parameter Name="V_REGION" Mode="In" Type="String" />
+            <Parameter Name="V_COMUNA" Mode="In" Type="String" />
+            <Parameter Name="V_DIRECCION" Mode="In" Type="String" />
+            <Parameter Name="V_PRECIODIA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_FOTODEPTO">
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_FOTO" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_ITEMSDEPTO">
+            <Parameter Name="V_IDITEM" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+            <Parameter Name="V_VALOR" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_MULTAS">
+            <Parameter Name="V_IDMULTA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DETALLE" Mode="In" Type="String" />
+            <Parameter Name="V_VALORMULTA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_PAGORESERVA">
+            <Parameter Name="V_IDPAGO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_FECHAPAGO" Mode="In" Type="DateTime" />
+            <Parameter Name="V_MONTO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_RESERVA">
+            <Parameter Name="V_IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDUSER" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_FECHARESERVA" Mode="In" Type="DateTime" />
+            <Parameter Name="V_FECHAINICIO" Mode="In" Type="DateTime" />
+            <Parameter Name="V_FECHATERMINO" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_SERVICIOSEXTRA">
+            <Parameter Name="V_IDSERVICIO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_NOMBRESERVICIO" Mode="In" Type="String" />
+            <Parameter Name="V_DESCRIPCION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_TIPOUSUARIO">
+            <Parameter Name="V_IDUSER" Mode="In" Type="Decimal" />
+            <Parameter Name="V_TIPOCTA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CREATE_USUARIOS">
+            <Parameter Name="V_IDUSER" Mode="In" Type="Decimal" />
+            <Parameter Name="V_EMAIL" Mode="In" Type="String" />
+            <Parameter Name="V_TIPOCTA" Mode="In" Type="String" />
+            <Parameter Name="V_PNOM" Mode="In" Type="String" />
+            <Parameter Name="V_SNOM" Mode="In" Type="String" />
+            <Parameter Name="V_PAPE" Mode="In" Type="String" />
+            <Parameter Name="V_SAPE" Mode="In" Type="String" />
+            <Parameter Name="V_RUT" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DVER" Mode="In" Type="String" />
+            <Parameter Name="V_CARGO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_CHECKIN">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_CHECKOUT">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_DEPTOS">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_FOTODEPTO">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_ITEMSDEPTO">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_MULTAS">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_PAGORESERVA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_RESERVA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_SERVICIOSEXTRA">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_TIPOUSUARIO">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DELETE_USUARIO">
+            <Parameter Name="V_ID" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_CHECKIN">
+            <Parameter Name="V_IDCHECKIN" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDPAGO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDSERVICIO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DOCUMENTO" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_CHECKOUT">
+            <Parameter Name="V_IDCHECKOUT" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDMULTA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DOCUMENTO" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_DEPTOS">
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DISPONIBILIDAD" Mode="In" Type="Decimal" />
+            <Parameter Name="V_ESTADO" Mode="In" Type="String" />
+            <Parameter Name="V_REGION" Mode="In" Type="String" />
+            <Parameter Name="V_COMUNA" Mode="In" Type="String" />
+            <Parameter Name="V_DIRECCION" Mode="In" Type="String" />
+            <Parameter Name="V_PRECIODIA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_FOTODEPTO">
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_FOTO" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_ITEMSDEPTO">
+            <Parameter Name="V_IDITEM" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DESC" Mode="In" Type="String" />
+            <Parameter Name="V_VALOR" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_MULTAS">
+            <Parameter Name="V_IDMULTA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DETALLE" Mode="In" Type="String" />
+            <Parameter Name="V_VALORMULTA" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_PAGORESERVA">
+            <Parameter Name="V_IDPAGO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_FECHAPAGO" Mode="In" Type="DateTime" />
+            <Parameter Name="V_MONTO" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_RESERVA">
+            <Parameter Name="V_IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDUSER" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDDEPTO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_FECHARESERVA" Mode="In" Type="DateTime" />
+            <Parameter Name="V_FECHAINICIO" Mode="In" Type="DateTime" />
+            <Parameter Name="V_FECHATERMINO" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_SERVICIOSEXTRA">
+            <Parameter Name="V_IDSERVICIO" Mode="In" Type="Decimal" />
+            <Parameter Name="V_IDRESERVA" Mode="In" Type="Decimal" />
+            <Parameter Name="V_NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="V_DESC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_TIPOUSUARIO">
+            <Parameter Name="V_IDUSER" Mode="In" Type="Decimal" />
+            <Parameter Name="V_TIPOCTA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_USUARIOS">
+            <Parameter Name="V_IDUSER" Mode="In" Type="Decimal" />
+            <Parameter Name="V_EMAIL" Mode="In" Type="String" />
+            <Parameter Name="V_TIPOCTA" Mode="In" Type="String" />
+            <Parameter Name="V_PNOM" Mode="In" Type="String" />
+            <Parameter Name="V_SNOM" Mode="In" Type="String" />
+            <Parameter Name="V_PAPE" Mode="In" Type="String" />
+            <Parameter Name="V_SAPE" Mode="In" Type="String" />
+            <Parameter Name="V_RUT" Mode="In" Type="Decimal" />
+            <Parameter Name="V_DVER" Mode="In" Type="String" />
+            <Parameter Name="V_CARGO" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="TurismoRealEntities">
+          <EntitySetMapping Name="CHECK_IN">
+            <EntityTypeMapping TypeName="Model.CHECK_IN">
+              <MappingFragment StoreEntitySet="CHECK_IN">
+                <ScalarProperty Name="ID_CHECKIN" ColumnName="ID_CHECKIN" />
+                <ScalarProperty Name="ID_DEPTO" ColumnName="ID_DEPTO" />
+                <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
+                <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+                <ScalarProperty Name="DOCUMENTO_ACEPTACIÓN" ColumnName="DOCUMENTO_ACEPTACIÓN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CHECK_OUT">
+            <EntityTypeMapping TypeName="Model.CHECK_OUT">
+              <MappingFragment StoreEntitySet="CHECK_OUT">
+                <ScalarProperty Name="ID_CHECKOUT" ColumnName="ID_CHECKOUT" />
+                <ScalarProperty Name="ID_MULTA" ColumnName="ID_MULTA" />
+                <ScalarProperty Name="ID_DEPTO" ColumnName="ID_DEPTO" />
+                <ScalarProperty Name="ID_RESERVA" ColumnName="ID_RESERVA" />
+                <ScalarProperty Name="DOCUMENTO_ENTREGA" ColumnName="DOCUMENTO_ENTREGA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPTOS">
+            <EntityTypeMapping TypeName="Model.DEPTOS">
+              <MappingFragment StoreEntitySet="DEPTOS">
+                <ScalarProperty Name="ID_DEPTO" ColumnName="ID_DEPTO" />
+                <ScalarProperty Name="DISPONIBILIDAD" ColumnName="DISPONIBILIDAD" />
+                <ScalarProperty Name="ESTADO_DEPTO" ColumnName="ESTADO_DEPTO" />
+                <ScalarProperty Name="REGION" ColumnName="REGION" />
+                <ScalarProperty Name="COMUNA" ColumnName="COMUNA" />
+                <ScalarProperty Name="DIRECCION" ColumnName="DIRECCION" />
+                <ScalarProperty Name="PRECIO_DIA" ColumnName="PRECIO_DIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FOTO_DEPTO">
+            <EntityTypeMapping TypeName="Model.FOTO_DEPTO">
+              <MappingFragment StoreEntitySet="FOTO_DEPTO">
+                <ScalarProperty Name="ID_DEPTO" ColumnName="ID_DEPTO" />
+                <ScalarProperty Name="FOTO" ColumnName="FOTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ITEMS_DEPTO">
+            <EntityTypeMapping TypeName="Model.ITEMS_DEPTO">
+              <MappingFragment StoreEntitySet="ITEMS_DEPTO">
+                <ScalarProperty Name="ID_ITEM" ColumnName="ID_ITEM" />
+                <ScalarProperty Name="ID_DEPTO" ColumnName="ID_DEPTO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MULTAS">
+            <EntityTypeMapping TypeName="Model.MULTAS">
+              <MappingFragment StoreEntitySet="MULTAS">
+                <ScalarProperty Name="ID_MULTA" ColumnName="ID_MULTA" />
+                <ScalarProperty Name="DETALLE" ColumnName="DETALLE" />
+                <ScalarProperty Name="VALOR_MULTA" ColumnName="VALOR_MULTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAGO_RESERVA">
+            <EntityTypeMapping TypeName="Model.PAGO_RESERVA">
+              <MappingFragment StoreEntitySet="PAGO_RESERVA">
+                <ScalarProperty Name="ID_PAGO" ColumnName="ID_PAGO" />
+                <ScalarProperty Name="ID_RESERVA" ColumnName="ID_RESERVA" />
+                <ScalarProperty Name="FECHA_PAGO" ColumnName="FECHA_PAGO" />
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVA">
+            <EntityTypeMapping TypeName="Model.RESERVA">
+              <MappingFragment StoreEntitySet="RESERVA">
+                <ScalarProperty Name="ID_RESERVA" ColumnName="ID_RESERVA" />
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="ID_DEPTO" ColumnName="ID_DEPTO" />
+                <ScalarProperty Name="FECHA_RESERVA" ColumnName="FECHA_RESERVA" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="FECHA_TERMINO" ColumnName="FECHA_TERMINO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERVICIOS_EXTRA">
+            <EntityTypeMapping TypeName="Model.SERVICIOS_EXTRA">
+              <MappingFragment StoreEntitySet="SERVICIOS_EXTRA">
+                <ScalarProperty Name="ID_SERVICIO" ColumnName="ID_SERVICIO" />
+                <ScalarProperty Name="ID_RESERVA" ColumnName="ID_RESERVA" />
+                <ScalarProperty Name="NOMBRE_SERVICIO" ColumnName="NOMBRE_SERVICIO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIOS">
+            <EntityTypeMapping TypeName="Model.USUARIOS">
+              <MappingFragment StoreEntitySet="USUARIOS">
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="EMAIL_USER" ColumnName="EMAIL_USER" />
+                <ScalarProperty Name="TIPO_CTA" ColumnName="TIPO_CTA" />
+                <ScalarProperty Name="P_NOM" ColumnName="P_NOM" />
+                <ScalarProperty Name="S_NOM" ColumnName="S_NOM" />
+                <ScalarProperty Name="P_APE" ColumnName="P_APE" />
+                <ScalarProperty Name="S_APE" ColumnName="S_APE" />
+                <ScalarProperty Name="RUT" ColumnName="RUT" />
+                <ScalarProperty Name="D_VER" ColumnName="D_VER" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_USUARIO">
+            <EntityTypeMapping TypeName="Model.TIPO_USUARIO">
+              <MappingFragment StoreEntitySet="TIPO_USUARIO">
+                <ScalarProperty Name="ID_USER" ColumnName="ID_USER" />
+                <ScalarProperty Name="TIPO_CTA" ColumnName="TIPO_CTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_CREATE_CHECKIN" FunctionName="Model.Store.SP_CREATE_CHECKIN" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_CHECKOUT" FunctionName="Model.Store.SP_CREATE_CHECKOUT" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_DEPTOS" FunctionName="Model.Store.SP_CREATE_DEPTOS" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_FOTODEPTO" FunctionName="Model.Store.SP_CREATE_FOTODEPTO" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_ITEMSDEPTO" FunctionName="Model.Store.SP_CREATE_ITEMSDEPTO" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_MULTAS" FunctionName="Model.Store.SP_CREATE_MULTAS" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_PAGORESERVA" FunctionName="Model.Store.SP_CREATE_PAGORESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_RESERVA" FunctionName="Model.Store.SP_CREATE_RESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_SERVICIOSEXTRA" FunctionName="Model.Store.SP_CREATE_SERVICIOSEXTRA" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_TIPOUSUARIO" FunctionName="Model.Store.SP_CREATE_TIPOUSUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_CREATE_USUARIOS" FunctionName="Model.Store.SP_CREATE_USUARIOS" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_CHECKIN" FunctionName="Model.Store.SP_DELETE_CHECKIN" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_CHECKOUT" FunctionName="Model.Store.SP_DELETE_CHECKOUT" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_DEPTOS" FunctionName="Model.Store.SP_DELETE_DEPTOS" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_FOTODEPTO" FunctionName="Model.Store.SP_DELETE_FOTODEPTO" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_ITEMSDEPTO" FunctionName="Model.Store.SP_DELETE_ITEMSDEPTO" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_MULTAS" FunctionName="Model.Store.SP_DELETE_MULTAS" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_PAGORESERVA" FunctionName="Model.Store.SP_DELETE_PAGORESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_RESERVA" FunctionName="Model.Store.SP_DELETE_RESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_SERVICIOSEXTRA" FunctionName="Model.Store.SP_DELETE_SERVICIOSEXTRA" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_TIPOUSUARIO" FunctionName="Model.Store.SP_DELETE_TIPOUSUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_DELETE_USUARIO" FunctionName="Model.Store.SP_DELETE_USUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_CHECKIN" FunctionName="Model.Store.SP_UPDATE_CHECKIN" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_CHECKOUT" FunctionName="Model.Store.SP_UPDATE_CHECKOUT" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_DEPTOS" FunctionName="Model.Store.SP_UPDATE_DEPTOS" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_FOTODEPTO" FunctionName="Model.Store.SP_UPDATE_FOTODEPTO" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_ITEMSDEPTO" FunctionName="Model.Store.SP_UPDATE_ITEMSDEPTO" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_MULTAS" FunctionName="Model.Store.SP_UPDATE_MULTAS" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_PAGORESERVA" FunctionName="Model.Store.SP_UPDATE_PAGORESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_RESERVA" FunctionName="Model.Store.SP_UPDATE_RESERVA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_SERVICIOSEXTRA" FunctionName="Model.Store.SP_UPDATE_SERVICIOSEXTRA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_TIPOUSUARIO" FunctionName="Model.Store.SP_UPDATE_TIPOUSUARIO" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_USUARIOS" FunctionName="Model.Store.SP_UPDATE_USUARIOS" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

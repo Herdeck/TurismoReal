@@ -1,0 +1,36 @@
+﻿@model TurismoReal.Negocio.Deptos
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editar departamento</h2>
+@Html.ValidationSummary()
+@Html.ActionLink("Lista de Deptos", "Index")
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(d => d.Id)
+    @Html.LabelFor(d => d.Id)
+    @Html.TextBoxFor(d => d.Id)
+    <br />
+    @Html.LabelFor(d => d.Disponibilidad)
+    @Html.TextBoxFor(d => d.Disponibilidad)
+    <br />
+    @Html.LabelFor(d => d.Estado)
+    @Html.TextBoxFor(d => d.Estado)
+    <br />
+    @Html.LabelFor(d => d.Region)
+    @Html.TextBoxFor(d => d.Region)
+    <br />
+    @Html.LabelFor(d => d.Comuna)
+    @Html.TextBoxFor(d => d.Comuna)
+    <br />
+    @Html.LabelFor(d => d.Direccion)
+    @Html.TextBoxFor(d => d.Direccion)
+    <br />
+    @Html.LabelFor(d => d.PrecioDia)
+    @Html.TextBoxFor(d => d.PrecioDia)
+    <br />
+    <button>Editar</button>
+    <br />
+}

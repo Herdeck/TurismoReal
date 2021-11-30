@@ -1,0 +1,39 @@
+﻿@model TurismoReal.Negocio.Deptos
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Agregar Deptos</h2>
+@Html.ValidationSummary()
+
+
+
+@Html.ActionLink("Lista de Deptos", "Index")
+@using (Html.BeginForm(""))
+{
+    @Html.LabelFor(d => d.Id)
+    @Html.TextBoxFor(d => d.Id)
+    <br />
+    @Html.LabelFor(d => d.Disponibilidad)
+    @Html.TextBoxFor(d => d.Disponibilidad)
+    <br />
+    @Html.LabelFor(d => d.Estado)
+    @Html.TextBoxFor(d => d.Estado)
+    <br />
+    @Html.LabelFor(d => d.Region)
+    @Html.TextBoxFor(d => d.Region)
+    <br />
+    @Html.LabelFor(d => d.Comuna)
+    @Html.TextBoxFor(d => d.Comuna)
+    <br />
+    @Html.LabelFor(d => d.Direccion)
+    @Html.TextBoxFor(d => d.Direccion)
+    <br />
+    @Html.LabelFor(d => d.PrecioDia)
+    @Html.TextBoxFor(d => d.PrecioDia)
+    <br />
+    <button>Guardar</button>
+    <br />
+}
+
