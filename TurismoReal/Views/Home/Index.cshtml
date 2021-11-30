@@ -5,9 +5,18 @@
 
 
 <h2>Bienvenido a Turismo Real</h2>
-@Html.ActionLink("Lista de Deptos", "Index","Deptos")
-@Html.ActionLink("Crear Depto", "Create","Deptos")
 
-@Html.ActionLink("Listado de ItemsDepto","Index","ItemsDepto")
-@Html.ActionLink("Crear item para un Depto","Create","ItemsDepto")
+<ul>
+    <button type="button" class="btn btn-outline-primary">@Html.ActionLink("Lista de Deptos", "Index", "Deptos")</button>
+</ul>
+<ul>
+    <button type="button" class="btn btn-outline-primary">@Html.ActionLink("Crear Depto", "Create", "Deptos")</button>
+</ul>
+<ul>
+    <button type="button" class="btn btn-outline-primary">@Html.ActionLink("Listado de ItemsDepto", "Index", "ItemsDepto")</button>
+</ul>
+<ul>
+    <button type="button" class="btn btn-outline-primary">@Html.ActionLink("Crear item para un Depto", "Create", "ItemsDepto")</button>
+</ul>
 
+@*<button type="button" class="btn btn-primary">@Html.ActionLink("Botonsito", "Index", "ItemsDepto")</button>*@
