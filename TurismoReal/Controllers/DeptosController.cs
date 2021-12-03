@@ -7,6 +7,7 @@ using TurismoReal.Negocio;
 
 namespace TurismoReal.Controllers
 {
+    [Authorize]
     public class DeptosController : Controller
     {
         // GET: Deptos

@@ -4,102 +4,108 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TurismoReal.Negocio;
+
 namespace TurismoReal.Controllers
 {
-    [Authorize]
-    public class ItemsDeptoController : Controller
+
+    public class UsuarioController : Controller
     {
-        // GET: ItemsDepto
+        // GET: Usuario
+        [Authorize]
         public ActionResult Index()
         {
-            ViewBag.itemsdepto = new ItemsDepto().ReadAll();
+            ViewBag.usuarios = new Usuario().RealAll();
             return View();
         }
 
-        // GET: ItemsDepto/Details/5
+        // GET: Usuario/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ItemsDepto/Create
+        // GET: Usuario/Create
         public ActionResult Create()
         {
-            ViewBag.deptos = new Deptos().ReadAll();
+
             return View();
         }
 
-        // POST: ItemsDepto/Create
+        // POST: Usuario/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include ="IdItem,IdDepto,Descripcion,Valor")]ItemsDepto itemsdepto)
+        public ActionResult Create([Bind(Include = "id,email,tipo_cuenta,pNombre,sNombre,pApellido,sApellido,rut,dVer,cargo")] Usuario usuario)
         {
             try
             {
                 // TODO: Add insert logic here
-                itemsdepto.Save();
-                TempData["mensaje"] = "Item guardado corectamente";
+                if (!ModelState.IsValid)
+                {
+                    return View(usuario);
+                }
+                usuario.Save();
+                TempData["mensaje"] = "Guardado Correctamente";
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View("Create");
+                return View(usuario);
             }
         }
 
-        // GET: ItemsDepto/Edit/5
+        // GET: Usuario/Edit/5
+        [Authorize]
         public ActionResult Edit(int id)
         {
-
-            ItemsDepto i = new ItemsDepto().Find(id);
-
-            if(i == null)
+            Usuario u = new Usuario().Find(id);
+            if (u == null)
             {
-                TempData["mensaje"] ="el item no existe";
+                TempData["mensaje"] = "El producto no existe";
                 return RedirectToAction("Index");
             }
-            ViewBag.itemsdepto = new ItemsDepto().ReadAll();
-            ViewBag.deptos = new Deptos().ReadAll();
 
-            return View(i);
+            return View(u);
         }
 
-        // POST: ItemsDepto/Edit/5
+        // POST: Usuario/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include ="IdItem,IdDepto,Descripcion,Valor")]ItemsDepto itemsDepto)
+        public ActionResult Edit([Bind(Include = "id,email,tipo_cuenta,pNombre,sNombre,pApellido,sApellido,rut,dVer,cargo")] Usuario usuario)
         {
             try
             {
                 // TODO: Add update logic here
-                itemsDepto.Update();
-                TempData["mensaje"] ="editado correctamente";
+                if (!ModelState.IsValid)
+                {
+                    return View(usuario);
+                }
+                usuario.Update();
+                TempData["mensaje"] = "Modificado correctamente";
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View(itemsDepto);
+                return View(usuario);
             }
         }
 
-        // GET: ItemsDepto/Delete/5
+        // GET: Usuario/Delete/5
+        [Authorize]
         public ActionResult Delete(int id)
         {
-
-            if(new ItemsDepto().Find(id) == null)
+            if (new Usuario().Find(id) == null)
             {
                 TempData["mensaje"] = "no existe el producto";
                 return RedirectToAction("Index");
             }
-
-            if (new ItemsDepto().Delete(id))
+            if (new Usuario().Delete(id))
             {
-                TempData["mensaje"] ="Eliminado correctamente";
+                TempData["mensaje"] = "Eliminado correctamente";
                 return RedirectToAction("Index");
             }
-            TempData["mensaje"] = "no se pudo eliminar";
-            return RedirectToAction("Index");
+            TempData["mensaje"] = "No se ha podido eliminar";
+            return View();
         }
 
-        // POST: ItemsDepto/Delete/5
+        // POST: Usuario/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

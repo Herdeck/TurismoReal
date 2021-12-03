@@ -1,0 +1,44 @@
+﻿@model TurismoReal.Negocio.Usuario
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Agregar Nuevo Usuario</h2>
+@Html.ValidationSummary()
+@Html.ActionLink("Listado de usuarios", "Index")
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(p => p.id, "ID")
+    @Html.TextBoxFor(p => p.id)
+    <br />
+    @Html.LabelFor(p => p.email, "Email")
+    @Html.TextBoxFor(p => p.email) <h3>   Este sera su nombre de usuario </h3>
+    <br />
+    @Html.LabelFor(p => p.tipo_cuenta, "Tipo de cuenta")
+    @Html.TextBoxFor(p => p.tipo_cuenta)
+    <br />
+    @Html.LabelFor(p => p.pNombre, "Nombre")
+    @Html.TextBoxFor(p => p.pNombre)
+    <br />
+    @Html.LabelFor(p => p.sNombre, "Segundo Nombre")
+    @Html.TextBoxFor(p => p.sNombre)
+    <br />
+    @Html.LabelFor(p => p.pApellido, "Apellido")
+    @Html.TextBoxFor(p => p.pApellido)
+    <br />
+    @Html.LabelFor(p => p.sApellido, "Segundo Apellido")
+    @Html.TextBoxFor(p => p.sApellido)
+    <br />
+    @Html.LabelFor(p => p.rut, "Rut")
+    @Html.TextBoxFor(p => p.rut) <h3>   Esta sera su contraseña </h3>
+    <br />
+    @Html.LabelFor(p => p.dVer, "Digito Verificador")
+    @Html.TextBoxFor(p => p.dVer)
+    <br />
+    @Html.LabelFor(p => p.cargo, "Cargo")
+    @Html.TextBoxFor(p => p.cargo)
+    <br />
+    <button>Guardar</button>
+
+}
+

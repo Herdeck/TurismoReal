@@ -1,0 +1,46 @@
+﻿@using TurismoReal.Negocio;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Luistado de Usuarios</h2>
+@{ List<Usuario> usuarios = (List<Usuario>)ViewBag.usuarios;}
+@Html.ActionLink("Crear Ususario", "Create")
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>EMAIL</th>
+        <th>TIPO CUENTA</th>
+        <th>NOMBRE</th>
+        <th>SEGUNDO NOMBRE</th>
+        <th>APELLIDO</th>
+        <th>SEGUNDO APELLIDO</th>
+        <th>RUT</th>
+        <th>DIGITO</th>
+        <th>CARGO</th>
+        <th>Opciones</th>
+    </tr>
+    @foreach (var usuario in usuarios)
+    {
+        <tr>
+            <td>@usuario.id</td>
+            <td>@usuario.email</td>
+            <td>@usuario.tipo_cuenta</td>
+            <td>@usuario.pNombre</td>
+            <td>@usuario.sNombre</td>
+            <td>@usuario.pApellido</td>
+            <td>@usuario.sApellido</td>
+            <td>@usuario.rut</td>
+            <td>@usuario.dVer</td>
+            <td>@usuario.cargo</td>
+            <td>
+                @Html.ActionLink("Eliminar", "Delete", new { id = usuario.id })
+                @Html.ActionLink("Modificar", "Edit", new { id = usuario.id })
+            </td>
+        </tr>
+    }
+</table>
+@TempData["mensaje"]
+

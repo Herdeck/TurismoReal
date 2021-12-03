@@ -1,0 +1,19 @@
+﻿@model TurismoReal.Negocio.Usuario
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Ingrese sus credenciales</h2>
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(u => u.email, "E-mail")
+    @Html.TextBoxFor(u => u.email, new { type = "email" })
+    <br />
+    @Html.LabelFor(u => u.rut, "Contraseña")
+    @Html.TextBoxFor(u => u.rut)
+    <br />
+    <button>Ingresar</button>
+    <br />
+    @TempData["mensaje"]
+
+}

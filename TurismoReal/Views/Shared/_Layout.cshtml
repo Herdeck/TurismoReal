@@ -16,9 +16,23 @@
             <div class="navbar-header">
                 @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
+            <ul class="nav navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        @Html.ActionLink("Cerrar sesion", "LogOut", "Auth")
+                    </li>
+                    <li>
+                        <a href="#">@User.Identity.Name</a>
+                    </li>
+
+                }
+
+                <li>
+                    @Html.ActionLink("Iniciar sesion", "Login", "Auth")
+                </li>
+            </ul>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
             </div>
         </div>
     </div>
