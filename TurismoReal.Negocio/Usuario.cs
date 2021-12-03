@@ -38,7 +38,7 @@ namespace TurismoReal.Negocio
         {
             return this.db.USUARIOS.Select(p => new Usuario()
             {
-
+                
                 id = (decimal)p.ID_USER,
                 email = p.EMAIL_USER,
                 tipo_cuenta = p.TIPO_CTA,
