@@ -1,0 +1,25 @@
+﻿@using TurismoReal.Negocio;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Lista de imagenes depto</h2>
+@{ List<FotoDepto> foto = (List<FotoDepto>)ViewBag.fotodepto;}
+
+<table>
+    <tr>
+        <th style="text-align:center;">Id Depto</th>
+        <th style="text-align:center;">Foto</th>
+        <th style="text-align:center;">Opciones</th>
+    </tr>
+    @foreach (var fotodepto in foto)
+    {
+        <tr>
+            <td style="text-align:center;">@fotodepto.Id</td>
+            <td><img src="data:image;base64,@System.Convert.ToBase64String(fotodepto.Foto)" width="100" height="100"  /></td>
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>
