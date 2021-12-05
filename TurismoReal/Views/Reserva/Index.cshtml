@@ -1,0 +1,38 @@
+﻿@using TurismoReal.Negocio;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Reservas</h2>
+
+@{ List<Reserva> reservas = (List<Reserva>)ViewBag.reserva; }
+@Html.ActionLink("Crear Reserva","Create")
+<table>
+    <tr>
+        <th>IdReserva</th>
+        <th>IdUsuario</th>
+        <th>IdDepto</th>
+        <th>FechaReserva</th>
+        <th>FechaInicio</th>
+        <th>FechaTermino</th>
+        <th>Opciones</th>
+    </tr>
+
+    @foreach(var reserva in reservas) 
+    {
+        <tr>
+            <td>@reserva.IdReserva</td>
+            <td>@reserva.IdUser</td>
+            <td>@reserva.IdDepto</td>
+            <td>@reserva.FechaReserva.ToShortDateString()</td>
+            <td>@reserva.FechaInicio.ToShortDateString()</td>
+            <td>@reserva.FechaTermino.ToShortDateString()</td>
+            <td>
+                @Html.ActionLink("Eliminar", "Delete", new { id = reserva.IdReserva })
+                @Html.ActionLink("Editar", "Edit", new { id = reserva.IdReserva })
+            </td>
+        </tr>
+    }
+</table>
+<br />
+@TempData["mensaje"]

@@ -1,0 +1,31 @@
+﻿@model TurismoReal.Negocio.Reserva
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Crear reserva</h2>
+@Html.ValidationSummary()
+
+@Html.ActionLink("Lista de Reservas", "Index")
+@using (Html.BeginForm(""))
+{
+    @Html.LabelFor(r => r.IdReserva)
+    @Html.TextBoxFor(r => r.IdReserva)
+    <br />
+    @Html.LabelFor(r => r.IdUser)
+    @Html.TextBoxFor(r => r.IdUser)
+    <br />
+    @Html.LabelFor(r => r.IdDepto)
+    @Html.TextBoxFor(r => r.IdDepto)
+    <br />
+    @Html.LabelFor(r => r.FechaReserva)
+    @Html.EditorFor(r => r.FechaReserva, new { @type = "date" })
+    <br />
+    @Html.LabelFor(r => r.FechaInicio)
+    @Html.EditorFor(r => r.FechaInicio, new { @type = "date" })
+    <br />
+    @Html.LabelFor(r => r.FechaTermino)
+    @Html.EditorFor(r => r.FechaTermino, new { @type = "date" })
+    <br />
+    <button>Crear Reserva</button>
+}

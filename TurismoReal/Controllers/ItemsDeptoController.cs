@@ -25,7 +25,6 @@ namespace TurismoReal.Controllers
         // GET: ItemsDepto/Create
         public ActionResult Create()
         {
-            ViewBag.deptos = new Deptos().ReadAll();
             return View();
         }
 
