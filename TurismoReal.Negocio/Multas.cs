@@ -4,38 +4,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TurismoReal.DALC;
+using System.ComponentModel.DataAnnotations;
 
 namespace TurismoReal.Negocio
 {
-    public class Multa
+    public class Multas
     {
-
-        public decimal IdMulta { get; set; }
+        [Required, Range(0,10000)]
+        public decimal Id { get; set; }
+        [Required, MinLength(3, ErrorMessage = "El {0} debe contener minimo {1} caracteres"), MaxLength(50)]
         public string Detalle { get; set; }
+        [Required, Range(1,1000000)]
         public decimal ValorMulta { get; set; }
-
 
         TurismoRealEntities db = new TurismoRealEntities();
 
-
-        public List<Multa> ReadAll()
+        public List<Multas> ReadAll()
         {
-            return this.db.MULTAS.Select(i => new Multa()
+            return this.db.MULTAS.Select(m => new Multas()
             {
-                IdMulta = i.ID_MULTA,
-                Detalle = i.DETALLE,
-                ValorMulta = i.VALOR_MULTA
 
+                Id = m.ID_MULTA,
+                Detalle = m.DETALLE,
+                ValorMulta = m.VALOR_MULTA           
+            
             }).ToList();
-
-
         }
 
         public bool Save()
         {
             try
             {
-                db.SP_CREATE_MULTAS(this.IdMulta, this.Detalle, this.ValorMulta);
+                db.SP_CREATE_MULTAS(this.Id,this.Detalle,this.ValorMulta);
                 return true;
             }
             catch (Exception)
@@ -45,25 +45,24 @@ namespace TurismoReal.Negocio
             }
         }
 
-        public Multa Find(int IdMulta)
+        public Multas Find(int id)
         {
-            return this.db.MULTAS.Select(p => new Multa()
+            return this.db.MULTAS.Select(m => new Multas()
             {
 
+                Id = m.ID_MULTA,
+                Detalle = m.DETALLE,
+                ValorMulta = m.VALOR_MULTA
 
-
-                IdMulta = p.ID_MULTA,
-                Detalle = p.DETALLE,
-                ValorMulta = p.VALOR_MULTA
-
-            }).Where(p => p.IdMulta == IdMulta).FirstOrDefault();
+            }).Where(m => m.Id == id).FirstOrDefault();
 
         }
+
         public bool Update()
         {
             try
             {
-                db.SP_UPDATE_MULTAS(this.IdMulta, this.Detalle, this.ValorMulta);
+                db.SP_UPDATE_MULTAS(this.Id, this.Detalle, this.ValorMulta);
                 return true;
             }
             catch (Exception)
@@ -71,14 +70,13 @@ namespace TurismoReal.Negocio
 
                 return false;
             }
-          
-
         }
-        public bool Delete(int IdMulta)
+
+        public bool Delete(int id)
         {
             try
             {
-                db.SP_DELETE_MULTAS(IdMulta);
+                db.SP_DELETE_MULTAS(id);
                 return true;
             }
             catch (Exception)
@@ -87,6 +85,5 @@ namespace TurismoReal.Negocio
                 return false;
             }
         }
-
     }
 }

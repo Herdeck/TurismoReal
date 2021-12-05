@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="Deptos.cs" />
     <Compile Include="ItemsDepto.cs" />
-    <Compile Include="Multa.cs" />
+    <Compile Include="Multas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserva.cs" />
     <Compile Include="Usuario.cs" />

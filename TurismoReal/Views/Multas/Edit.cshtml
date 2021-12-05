@@ -1,0 +1,21 @@
+﻿@model  TurismoReal.Negocio.Multas
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editar Multa</h2>
+@Html.ValidationSummary()
+@Html.ActionLink("Lista de multas", "Index")
+@using (Html.BeginForm(""))
+{
+    @Html.LabelFor(m => m.Id)
+    @Html.TextBoxFor(m => m.Id)
+    <br />
+    @Html.LabelFor(m => m.Detalle)
+    @Html.TextBoxFor(m => m.Detalle)
+    <br />
+    @Html.LabelFor(m => m.ValorMulta)
+    @Html.TextBoxFor(m => m.ValorMulta)
+    <br />
+    <button>Editar</button>
+}
