@@ -1,0 +1,29 @@
+﻿@model TurismoReal.Negocio.CheckIn
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Agregar Items a un Depto</h2>
+@Html.ActionLink("Ver listado CheckIn", "Index")
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(i => i.IdCheckIn)
+    @Html.TextBoxFor(i => i.IdCheckIn)
+    <br />
+    @Html.LabelFor(i => i.IdDepto)
+    @Html.TextBoxFor(i => i.IdDepto)
+    <br />
+    @Html.LabelFor(i => i.IdPago)
+    @Html.TextBoxFor(i => i.IdPago)
+    <br />
+    @Html.LabelFor(i => i.IdServicio)
+    @Html.TextBoxFor(i => i.IdServicio)
+    <br />
+    @Html.LabelFor(i => i.DocumentoAceptacion)
+    @Html.TextBoxFor(i => i.DocumentoAceptacion)
+    <br />
+    <button>Guardar</button>
+}
+

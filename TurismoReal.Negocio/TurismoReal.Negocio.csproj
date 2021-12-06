@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckIn.cs" />
     <Compile Include="Deptos.cs" />
     <Compile Include="FotoDepto.cs" />
     <Compile Include="ItemsDepto.cs" />
