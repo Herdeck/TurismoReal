@@ -53,6 +53,7 @@
     <Compile Include="Multas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserva.cs" />
+    <Compile Include="ServiciosExtra.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
   <ItemGroup>

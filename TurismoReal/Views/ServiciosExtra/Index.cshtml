@@ -1,0 +1,35 @@
+﻿@using TurismoReal.Negocio
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado servicios extra</h2>
+
+@{ List<ServiciosExtra> servicios = (List<ServiciosExtra>)ViewBag.serviciosextra; }
+@Html.ActionLink("Crear servicio extra", "Create")
+<table>
+    <tr>
+        <th>Id Servicio</th>
+        <th>Id Reserva</th>
+        <th>Nombre Servicio</th>
+        <th>Descripción</th>
+        <th>Opciones</th>
+    </tr>
+    @foreach (var servicio in servicios)
+    { 
+        <tr>
+            <td>@servicio.IdServicio</td>
+            <td>@servicio.IdReserva</td>
+            <td>@servicio.NombreServicio</td>
+            <td>@servicio.Descripcion</td>
+            <td>
+                @Html.ActionLink("Eliminar","Delete", new { id = servicio.IdServicio })
+                @Html.ActionLink("Editar","Edit", new { id = servicio.IdServicio})
+            </td>
+        </tr>
+    }
+
+</table>
+
+@TempData["mensaje"]

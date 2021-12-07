@@ -1,0 +1,28 @@
+﻿@model TurismoReal.Negocio.ServiciosExtra
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Agregar servicio extra</h2>
+@Html.ValidationSummary()
+
+@Html.ActionLink("Lista de servicios", "Index")
+
+@using (Html.BeginForm(""))
+{
+    
+    @Html.LabelFor(s => s.IdServicio)
+    @Html.TextBoxFor(s => s.IdServicio)
+    <br />
+    @Html.LabelFor(s => s.IdReserva)
+    @Html.TextBoxFor(s => s.IdReserva)
+    <br />
+    @Html.LabelFor(s => s.NombreServicio)
+    @Html.TextBoxFor(s => s.NombreServicio)
+    <br />
+    @Html.LabelFor(s => s.Descripcion)
+    @Html.TextBoxFor(s => s.Descripcion)
+    <br />
+    <button>Guardar</button>
+
+}
