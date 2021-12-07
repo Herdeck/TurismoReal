@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CheckIn.cs" />
+    <Compile Include="CheckOut.cs" />
     <Compile Include="Deptos.cs" />
     <Compile Include="FotoDepto.cs" />
     <Compile Include="ItemsDepto.cs" />

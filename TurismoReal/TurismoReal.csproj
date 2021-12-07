@@ -214,6 +214,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CheckInController.cs" />
+    <Compile Include="Controllers\CheckoOutController.cs" />
     <Compile Include="Controllers\DeptosController.cs" />
     <Compile Include="Controllers\FotoDeptoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -287,6 +288,9 @@
     <Content Include="Views\PagoReserva\Index.cshtml" />
     <Content Include="Views\PagoReserva\Create.cshtml" />
     <Content Include="Views\PagoReserva\Edit.cshtml" />
+    <Content Include="Views\CheckoOut\Index.cshtml" />
+    <Content Include="Views\CheckoOut\Create.cshtml" />
+    <Content Include="Views\CheckoOut\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

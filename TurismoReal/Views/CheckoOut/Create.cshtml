@@ -1,0 +1,29 @@
+﻿@model TurismoReal.Negocio.CheckOut
+
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Crear checkin</h2>
+@Html.ActionLink("Ver listado CheckOut", "Index")
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(i => i.IdCheckOut)
+    @Html.TextBoxFor(i => i.IdCheckOut)
+    <br />
+    @Html.LabelFor(i => i.IdMulta)
+    @Html.TextBoxFor(i => i.IdMulta)
+    <br />
+    @Html.LabelFor(i => i.IdDepto)
+    @Html.TextBoxFor(i => i.IdDepto)
+    <br />
+    @Html.LabelFor(i => i.IdReserva)
+    @Html.TextBoxFor(i => i.IdReserva)
+    <br />
+    @Html.LabelFor(i => i.DocumentoEntrega)
+    @Html.TextBoxFor(i => i.DocumentoEntrega)
+    <br />
+    <button>Guardar</button>
+}
+

@@ -1,0 +1,39 @@
+﻿@using TurismoReal.Negocio;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado check in </h2>
+
+@{ List<CheckOut> checkout = (List<CheckOut>)ViewBag.checkout;}
+@Html.ActionLink("Crear CheckOut", "Create")
+<table>
+    <tr>
+        <th>IdCheckOut</th>
+        <th>IdMulta</th>
+        <th>IdDepto</th>
+        <th>IdReserva</th>
+        <th>Documento Entrega</th>
+        <th>Opciones</th>
+    </tr>
+    @foreach (var checkouts in checkout)
+    {
+<tr>
+    <td>@checkouts.IdCheckOut</td>
+    <td>@checkouts.IdMulta</td>
+    <td>@checkouts.IdDepto</td>
+    <td>@checkouts.IdReserva</td>
+    <td>@checkouts.DocumentoEntrega</td>
+
+
+
+    <td>
+        @Html.ActionLink("Eliminar", "Delete", new { id = checkouts.IdCheckOut })
+        @Html.ActionLink("Editar", "Edit", new { id = checkouts.IdCheckOut })
+    </td>
+</tr>
+    }
+</table>
+
+<br />
+@TempData["mensaje"]

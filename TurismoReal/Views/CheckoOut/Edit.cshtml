@@ -1,0 +1,30 @@
+﻿@model TurismoReal.Negocio.CheckOut
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+<h2>Modificar CheckIn</h2>
+@Html.ActionLink("Ver listado CheckOut", "Index")
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(i => i.IdCheckOut)
+    @Html.LabelFor(i => i.IdCheckOut)
+    @Html.TextBoxFor(i => i.IdCheckOut)
+    <br />
+    @Html.LabelFor(i => i.IdMulta)
+    @Html.TextBoxFor(i => i.IdMulta)
+    <br />
+    @Html.LabelFor(i => i.IdDepto)
+    @Html.TextBoxFor(i => i.IdDepto)
+    <br />
+    @Html.LabelFor(i => i.IdReserva)
+    @Html.TextBoxFor(i => i.IdReserva)
+    <br />
+    @Html.LabelFor(i => i.DocumentoEntrega)
+    @Html.TextBoxFor(i => i.DocumentoEntrega)
+    <br />
+    <button>Editar</button>
+}
