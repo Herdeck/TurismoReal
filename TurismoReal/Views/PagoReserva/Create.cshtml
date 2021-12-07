@@ -1,0 +1,24 @@
+﻿@model TurismoReal.Negocio.PagoReserva
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Crear Pago reserva</h2>
+@Html.ValidationSummary()
+@Html.ActionLink("Lista de pagos","Index")
+@using (Html.BeginForm("")) 
+{
+    @Html.LabelFor(p => p.IdPago)
+    @Html.TextBoxFor(p => p.IdPago)
+    <br />
+    @Html.LabelFor(p => p.IdReserva)
+    @Html.TextBoxFor(p => p.IdReserva)
+    <br />
+    @Html.LabelFor(p => p.FechaPago)
+    @Html.EditorFor(p => p.FechaPago, new {@type = "date" })
+    <br />
+    @Html.LabelFor(p => p.Monto)
+    @Html.TextBoxFor(p => p.Monto)
+    <br />
+    <button>Crear pago reserva</button>
+}

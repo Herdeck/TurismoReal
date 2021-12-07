@@ -1,0 +1,33 @@
+﻿@using TurismoReal.Negocio;
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Pago reserva</h2>
+@{ List<PagoReserva> pago = (List<PagoReserva>)ViewBag.pagoreserva;}
+@Html.ActionLink("Crear pago reserva", "Create")
+<table>
+    <tr>
+        <th>Id Pago</th>
+        <th>Id Reserva</th>
+        <th>Fecha Pago</th>
+        <th>Monto</th>
+        <th>Opciones</th>
+    </tr>
+    @foreach(var pagos in pago) 
+    {
+        <tr>
+            <td>@pagos.IdPago</td>
+            <td>@pagos.IdReserva</td>
+            <td>@pagos.FechaPago.ToShortDateString()</td>
+            <td>@pagos.Monto</td>
+            <td>
+                @Html.ActionLink("Eliminar","Delete", new { id = pagos.IdPago})
+                @Html.ActionLink("Editar","Edit", new { id = pagos.IdPago})
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+@TempData["mensaje"]

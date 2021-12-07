@@ -219,6 +219,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsDeptoController.cs" />
     <Compile Include="Controllers\MultasController.cs" />
+    <Compile Include="Controllers\PagoReservaController.cs" />
     <Compile Include="Controllers\ReservaController.cs" />
     <Compile Include="Controllers\ServiciosExtraController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -283,6 +284,9 @@
     <Content Include="Views\ServiciosExtra\Index.cshtml" />
     <Content Include="Views\ServiciosExtra\Create.cshtml" />
     <Content Include="Views\ServiciosExtra\Edit.cshtml" />
+    <Content Include="Views\PagoReserva\Index.cshtml" />
+    <Content Include="Views\PagoReserva\Create.cshtml" />
+    <Content Include="Views\PagoReserva\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

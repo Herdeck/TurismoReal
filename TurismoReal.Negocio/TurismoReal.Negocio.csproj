@@ -51,6 +51,7 @@
     <Compile Include="FotoDepto.cs" />
     <Compile Include="ItemsDepto.cs" />
     <Compile Include="Multas.cs" />
+    <Compile Include="PagoReserva.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserva.cs" />
     <Compile Include="ServiciosExtra.cs" />
